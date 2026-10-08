@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script_path=$0
+while [[ -L "$script_path" ]]; do
+  link_dir=$(cd -P "$(dirname "$script_path")" >/dev/null 2>&1 && pwd)
+  link_target=$(readlink "$script_path")
+  [[ $link_target == /* ]] || link_target="$link_dir/$link_target"
+  script_path=$link_target
+done
+repo_root=$(cd -P "$(dirname "$script_path")/.." >/dev/null 2>&1 && pwd)
+local_dir="$repo_root/.local"
+daily_dir="$local_dir/dailynotes"
+today=$(date +%F)
+notes_file="$daily_dir/$today.md"
+lock_dir="$local_dir/.note.lock"
+tmp_file=$(mktemp "${TMPDIR:-/tmp}/knowledge-hub-note.XXXXXX")
+
+cleanup() {
+  rm -f "$tmp_file"
+  rmdir "$lock_dir" 2>/dev/null || true
+}
+trap cleanup EXIT INT TERM
+
+mkdir -p "$daily_dir"
+
+editor=${VISUAL:-${EDITOR:-vim}}
+read -r -a editor_cmd <<< "$editor"
+"${editor_cmd[@]}" "$tmp_file"
+
+if [[ ! -s "$tmp_file" ]] || [[ -z "$(tr -d '[:space:]' < "$tmp_file")" ]]; then
+  printf '%s\n' 'No note saved.'
+  exit 0
+fi
+
+while ! mkdir "$lock_dir" 2>/dev/null; do
+  sleep 0.05
+done
+
+{
+  printf '## %s\n\n' "$(date +%T)"
+  cat "$tmp_file"
+  printf '\n\n'
+} >> "$notes_file"
+printf 'Note saved to %s\n' "$notes_file"
