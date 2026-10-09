@@ -9,7 +9,7 @@ while [[ -L "$script_path" ]]; do
   script_path=$link_target
 done
 repo_root=$(cd -P "$(dirname "$script_path")/.." >/dev/null 2>&1 && pwd)
-local_dir="$repo_root/.local"
+local_dir="$HOME/.knowledge-hub"
 daily_dir="$local_dir/dailynotes"
 today=$(date +%F)
 notes_file="$daily_dir/$today.md"

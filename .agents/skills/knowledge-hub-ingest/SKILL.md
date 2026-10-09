@@ -5,7 +5,7 @@ description: Process Knowledge Hub daily journals into cited daily digests, topi
 
 # Knowledge Hub Ingest
 
-Process the Knowledge Hub repository's private `.local/` data. Resolve the repository root from this skill's location, never from the conversation's current directory. Do not modify raw journals.
+Process the Knowledge Hub repository's private `$HOME/.knowledge-hub/` data. Resolve the repository root from this skill's location, never from the conversation's current directory. Do not modify raw journals.
 
 ## Invocation
 
@@ -19,21 +19,22 @@ Before re-ingesting, state which derived pages will be rebuilt or changed and wa
 
 ## Files
 
-- Raw journals: `.local/dailynotes/YYYY-MM-DD.md`
-- Daily digests: `.local/wiki/daily/YYYY-MM-DD.md`
-- People: `.local/wiki/people/`
-- Projects: `.local/wiki/projects/`
-- Processes: `.local/wiki/processes/`
-- Resources and channels: `.local/wiki/resources/`
-- Sources: `.local/sources.md`
-- Active priorities: `.local/priorities.md`
-- Archived priorities: `.local/archive/priorities-YYYY.md`
+- Raw journals: `$HOME/.knowledge-hub/dailynotes/YYYY-MM-DD.md`
+- Daily digests: `$HOME/.knowledge-hub/wiki/daily/YYYY-MM-DD.md`
+- People: `$HOME/.knowledge-hub/wiki/people/`
+- Teams: `$HOME/.knowledge-hub/wiki/teams/`
+- Projects: `$HOME/.knowledge-hub/wiki/projects/`
+- Processes: `$HOME/.knowledge-hub/wiki/processes/`
+- Resources and channels: `$HOME/.knowledge-hub/wiki/resources/`
+- Sources: `$HOME/.knowledge-hub/sources.md`
+- Active priorities: `$HOME/.knowledge-hub/priorities.md`
+- Archived priorities: `$HOME/.knowledge-hub/archive/priorities-YYYY.md`
 
 Create directories and derived files lazily. Preserve the raw journal byte-for-byte.
 
 ## Source setup
 
-On every invocation, show the current sources and ask the user to confirm, edit, or skip them. If `.local/sources.md` is absent, ask for documentation, communication, initiative, and ticket-system links and create it only after the user provides them.
+On every invocation, show the current sources and ask the user to confirm, edit, or skip them. If `$HOME/.knowledge-hub/sources.md` is absent, ask for documentation, communication, initiative, and ticket-system links and create it only after the user provides them.
 
 Validate each source when it is needed. Record its name, URL, type, governed knowledge, and last successful access date. Do not store credentials, tokens, or cookies. Continue when a source is unavailable, but mark affected conclusions as incomplete.
 
@@ -56,18 +57,18 @@ Use available tools and the user's configured `okf` Bash command when useful. If
 
 All derived pages must be readable by humans and agents and follow the user's OKF conventions. Run the user's `okf` command when its syntax is known; do not invent a replacement validator.
 
-Every meaningful derived claim gets a nearby Markdown citation. Include a Sources section with links to the raw journal, daily digest, topical pages, and external URLs used. Use timestamp headings from the raw journal for local citations.
+Every meaningful derived claim gets a nearby Markdown citation. Include a Sources section with links to the raw journal, daily digest, topical pages, and external URLs used. Use timestamp headings from the raw journal for$HOME/.knowledge-hub citations.
 
-Use stable typed slugs. Ask before merging uncertain people, projects, or resources. Preserve existing filenames across renames unless identity ambiguity requires separation.
+Use stable typed slugs. Ask before merging uncertain people, teams, projects, or resources. Preserve existing filenames across renames unless identity ambiguity requires separation.
 
 ## Priorities
 
-Maintain `.local/priorities.md` as Markdown with active `proposed`, `active`, and `waiting` items grouped by horizon. Each item includes status, urgency from 0–5, estimate, context, next action, and sources.
+Maintain `$HOME/.knowledge-hub/priorities.md` as Markdown with active `proposed`, `active`, and `waiting` items grouped by horizon. Each item includes status, urgency from 0–5, estimate, context, next action, and sources.
 
 - Near: estimate `<= 3h`
 - Mid: estimate `> 3h` and `<= 7d`
 - Long: estimate `> 7d`
 
-Treat `7d` as seven ordinary calendar days. Do not confuse elapsed duration with business days or focused-work effort. Archive completed and dropped items in `.local/archive/priorities-YYYY.md`, retaining sources, outcome, and reason.
+Treat `7d` as seven ordinary calendar days. Do not confuse elapsed duration with business days or focused-work effort. Archive completed and dropped items in `$HOME/.knowledge-hub/archive/priorities-YYYY.md`, retaining sources, outcome, and reason.
 
 Do not silently change urgency, estimate, horizon, or scope merely to improve today's plan. Merge duplicate work only with high confidence; ask when a merge could erase a distinction.
