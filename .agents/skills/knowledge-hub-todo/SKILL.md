@@ -36,7 +36,11 @@ Fit recommendations within the available time. A plan may allocate less than eig
 
 ## User Feedback
 
-Provide user the items you've chosen for them to focus on today. Ask them if they approve or if they'd like to adjust the priorities. Adjust based on their feedback. Then proceed to the next step only after they've replied.
+Do not output the list of tasks for user to focus on until you have asked these questions and gotten feedback.
+
+1) Review any tasks found in the existing priorities pages which are not complete, whether blocked or not, and ask the user to provide the current status of the top 5 highest priority tasks.
+
+2) After the user responds, use their answers to adjust the list of priorities. Figure out the top items you've chosen for them to focus on today. Ask them if they approve or if they'd like to adjust the priorities. Adjust based on their feedback. 
 
 ## Output
 
