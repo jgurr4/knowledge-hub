@@ -12,7 +12,7 @@ Resolve the Knowledge Hub repository root from this skill's location and read pr
 Read:
 
 - `$HOME/.knowledge-hub/priorities.md`
-- Relevant daily digests and topical wiki pages linked by selected priorities
+- Relevant entity wiki pages and raw journal entries linked by selected priorities
 - `$HOME/.knowledge-hub/sources.md` when links or people are useful
 - The current date and any user-provided constraints
 

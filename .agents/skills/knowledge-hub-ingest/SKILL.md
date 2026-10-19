@@ -1,6 +1,6 @@
 ---
 name: knowledge-hub-ingest
-description: Process Knowledge Hub daily journals into cited daily digests, topical wiki pages, and priorities.
+description: Process Knowledge Hub daily journals into cited entity wiki pages (people, teams, projects, processes, concepts, resources) and priorities.
 ---
 
 # Knowledge Hub Ingest
@@ -20,17 +20,24 @@ Before re-ingesting, state which derived pages will be rebuilt or changed and wa
 ## Files
 
 - Raw journals: `$HOME/.knowledge-hub/dailynotes/YYYY-MM-DD.md`
-- Daily digests: `$HOME/.knowledge-hub/wiki/daily/YYYY-MM-DD.md`
 - People: `$HOME/.knowledge-hub/wiki/people/`
 - Teams: `$HOME/.knowledge-hub/wiki/teams/`
 - Projects: `$HOME/.knowledge-hub/wiki/projects/`
 - Processes: `$HOME/.knowledge-hub/wiki/processes/`
+- Concepts: `$HOME/.knowledge-hub/wiki/concepts/`
 - Resources and channels: `$HOME/.knowledge-hub/wiki/resources/`
+- Ingest state: `$HOME/.knowledge-hub/ingest-state.md`
 - Sources: `$HOME/.knowledge-hub/sources.md`
 - Active priorities: `$HOME/.knowledge-hub/priorities.md`
 - Archived priorities: `$HOME/.knowledge-hub/archive/priorities-YYYY.md`
 
 Create directories and derived files lazily. Preserve the raw journal byte-for-byte.
+
+## Wiki pages are entities, never dates
+
+The wiki holds only entity pages: a person, team, project, process, concept, or resource. Never create a wiki page whose subject is a day, date, journal, or ingestion run. Never create `wiki/daily/` or any date-named wiki file (for example `YYYY-MM-DD.md`). The raw journal in `dailynotes/` is already the chronological record; do not duplicate it as a digest.
+
+File each journal fact under the entity it is about. If a fact fits no existing entity, create a new typed entity page or ask the user where it belongs. If a fact is only a to-do with no lasting knowledge, put it in priorities instead of the wiki. Date context belongs inside entity pages as dated statements citing the raw journal, not as a separate page.
 
 ## Source setup
 
@@ -42,22 +49,22 @@ Use available tools and the user's configured `okf` Bash command when useful. If
 
 ## Processing
 
-1. Read the selected raw journal and the existing daily digest marker.
+1. Read the selected raw journal and its last-processed timestamp from `ingest-state.md`.
 2. Process only entries after the recorded last-processed timestamp unless this is an explicit re-ingestion.
 3. Ask only questions needed to resolve ambiguity, identity, urgency, ownership, purpose, follow-up, missing context, or conflicting sources.
-4. Review current-year daily and topical wiki context, following older material only when relevant.
+4. Review relevant entity wiki pages and current-year raw journals, following older material only when relevant.
 5. Resolve high-confidence contradictions using the stronger source and retain citations. Ask the user when confidence is insufficient.
 6. Warn if content appears to contain secrets, credentials, customer data, personnel information, or other obvious sensitive material. Do not copy suspected sensitive values into derived pages unless the user explicitly confirms it is appropriate.
 7. Complete clarification before changing derived files. If interrupted, leave existing derived files unchanged.
-8. Write one daily digest for the date and update only relevant topical pages.
+8. Update or create only the relevant entity pages. Do not write any per-day summary page.
 9. Update priorities from the notes, wiki context, and accessible external sources.
-10. Record the latest processed note timestamp in the daily digest.
+10. Record the latest processed note timestamp for the journal date in `ingest-state.md` (one line per journal date: `YYYY-MM-DD: HH:MM:SS`). Show the user a short summary of changes in chat instead of writing a digest file.
 
 ## Markdown contract
 
 All derived pages must be readable by humans and agents and follow the user's OKF conventions. Run the user's `okf` command when its syntax is known; do not invent a replacement validator.
 
-Every meaningful derived claim gets a nearby Markdown citation. Include a Sources section with links to the raw journal, daily digest, topical pages, and external URLs used. Use timestamp headings from the raw journal for$HOME/.knowledge-hub citations.
+Every meaningful derived claim gets a nearby Markdown citation. Include a Sources section with links to the raw journal entries, related entity pages, and external URLs used. Cite raw journal entries by their timestamp headings (for example `dailynotes/YYYY-MM-DD.md#hhmmss`). Never cite or link a daily digest.
 
 Use stable typed slugs. Ask before merging uncertain people, teams, projects, or resources. Preserve existing filenames across renames unless identity ambiguity requires separation.
 

@@ -56,8 +56,7 @@ The ingest skill:
 - Reviews new daily journal entries.
 - Shows saved source links and asks whether to confirm, edit, or skip them.
 - Asks focused questions when a note is ambiguous.
-- Creates a cited daily digest.
-- Updates relevant people, teams, project, process, and resource pages.
+- Updates relevant people, team, project, process, concept, and resource pages (never per-day digest pages).
 - Updates priorities using notes, wiki context, and available external sources.
 - Warns when content appears to contain obvious sensitive information.
 - Uses the repository's `okf` command when appropriate for validating derived Markdown.
@@ -100,11 +99,11 @@ knowledge-hub/
 │   ├── dailynotes/                  # Immutable raw daily journals
 │   │   └── YYYY-MM-DD.md
 │   ├── wiki/
-│   │   ├── daily/                   # Derived daily digests
 │   │   ├── people/                  # Coworker and contact knowledge
 │   │   ├── teams/                   # Team knowledge
 │   │   ├── projects/                # Project knowledge
 │   │   ├── processes/               # Process and workflow knowledge
+│   │   ├── concepts/                # Concept knowledge
 │   │   └── resources/               # Documentation, channels, and resources
 │   ├── archive/                     # Completed and dropped priority history
 │   │   └── priorities-YYYY.md
@@ -125,7 +124,7 @@ Active priority items should record:
 - Estimate: for example `45m`, `3h`, or `4d`.
 - Horizon: near, mid, or long.
 - Context and next action.
-- Links to supporting daily digests, wiki pages, or external sources.
+- Links to supporting raw journal entries, wiki pages, or external sources.
 
 Completed and dropped items are moved to the yearly archive by the ingest or todo workflow.
 
