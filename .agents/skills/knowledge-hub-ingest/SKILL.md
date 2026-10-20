@@ -56,9 +56,14 @@ Use available tools and the user's configured `okf` Bash command when useful. If
 5. Resolve high-confidence contradictions using the stronger source and retain citations. Ask the user when confidence is insufficient.
 6. Warn if content appears to contain secrets, credentials, customer data, personnel information, or other obvious sensitive material. Do not copy suspected sensitive values into derived pages unless the user explicitly confirms it is appropriate.
 7. Complete clarification before changing derived files. If interrupted, leave existing derived files unchanged.
-8. Update or create only the relevant entity pages. Do not write any per-day summary page.
-9. Update priorities from the notes, wiki context, and accessible external sources.
+8. Update or create only the relevant entity pages (including people, teams, projects, processes/sops, concepts, resources, channels and priorities). Do not write any per-day summary page.
+9. When the user provides new teammate details, update the matching `wiki/people/<slug>.md` page with the directly stated, work-relevant facts and clear nearby citations to the source journal/context. Resolve identity against the existing page/ADSID; ask if the match is ambiguous rather than guessing. Update `wiki/people/missing-details.md` to reflect which factual fields were confirmed, and preserve unknowns for fields not provided.
+10. Update priorities from the notes, wiki context, and accessible external sources.
 10. Record the latest processed note timestamp for the journal date in `ingest-state.md` (one line per journal date: `YYYY-MM-DD: HH:MM:SS`). Show the user a short summary of changes in chat instead of writing a digest file.
+
+## People details and privacy
+
+Treat teammate details as factual knowledge supplied by the user or a trusted source, not as a prompt to profile coworkers. Record names, role, self-described expertise, current work, and concrete work-relevant collaboration preferences only when directly supplied or appropriately sourced. Do not infer or store competence, dependability, friendliness, interpersonal compatibility, or numeric personnel ratings from tickets, journals, or other indirect evidence. If the user volunteers subjective evaluations, do not add them to people pages; explain that people pages should use factual, respectful, work-relevant information. Frequent collaborators may be documented only when explicitly identified by a reliable source; ticket co-assignment alone is not proof of frequent interaction. Keep unsupported fields as `unknown`, and update the missing-details log accordingly.
 
 ## Markdown contract
 

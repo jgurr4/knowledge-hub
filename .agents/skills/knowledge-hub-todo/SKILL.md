@@ -14,6 +14,7 @@ Read:
 - `$HOME/.knowledge-hub/priorities.md`
 - Relevant entity wiki pages and raw journal entries linked by selected priorities
 - `$HOME/.knowledge-hub/sources.md` when links or people are useful
+- `$HOME/.knowledge-hub/wiki/people/missing-details.md` whenever person entities or networking suggestions may be relevant
 - The current date and any user-provided constraints
 
 If priorities are absent or empty, say so and stop. Do not create placeholder tasks.
@@ -81,13 +82,13 @@ A Firstmate prompt should include the project, desired outcome, context, source 
 
 Do not suggest autonomous delegation for sensitive communications, personnel matters, ambiguous priorities, irreversible actions, or decisions requiring undocumented organizational judgment.
 
-## Networking and Work relations
+## Networking and Work Relations
 
-Add the `Networking Suggestions` section. It may contain:
+Always add a concise `Networking Suggestions` section when relevant people or teams appear in the selected priorities. Read the applicable person/team pages and `wiki/people/missing-details.md` before suggesting outreach.
 
-- A entity such as team or person from the wiki pages
-- A useful fact to remember about them such as when they are good to reach out to, or what the user notes has been good experiences to build rapport in the past
-- A actionable step to reach out and engage with them based on the days priorities and a text snippet of what to say
-- An optional work-related or programming joke
-
-If no person or team entity wiki pages exist, then encourage the user to reach out to someone today and add any details using `note` so that you can begin to offer suggestions for building rapport
+- Suggest a teammate only when there is a concrete work connection to today's priorities; explain the evidence and keep ticket assignments as leads, not proof of frequent collaboration.
+- Offer a low-pressure, work-relevant next step (for example, ask for context, offer a review, or pair on a specific blocker) and a short draft message.
+- Use names and collaboration preferences only when confirmed by the user or an approved source. Otherwise use the existing handle and say what is unknown.
+- Encourage getting to know relevant teammates naturally through useful collaboration. Ask Jared to share only directly known, work-relevant details if he wants them recorded; update the missing-details log only with that confirmation.
+- Treat competence, dependability, friendliness, and interpersonal compatibility as subjective personnel judgments: do not score, infer, solicit ratings about, or store them. Prefer voluntary self-described expertise and concrete collaboration preferences/outcomes, with clear sourcing.
+- If there are no evidenced people to contact, say so rather than inventing a networking task.
