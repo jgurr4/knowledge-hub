@@ -84,3 +84,7 @@ Maintain `$HOME/.knowledge-hub/priorities.md` as Markdown with active `proposed`
 Treat `7d` as seven ordinary calendar days. Do not confuse elapsed duration with business days or focused-work effort. Archive completed and dropped items in `$HOME/.knowledge-hub/archive/priorities-YYYY.md`, retaining sources, outcome, and reason.
 
 Do not silently change urgency, estimate, horizon, or scope merely to improve today's plan. Merge duplicate work only with high confidence; ask when a merge could erase a distinction.
+
+## Version Control
+
+Always commit any changes made to the local .knowledge-hub folder. Never push commit changes to a remote server.
