@@ -50,7 +50,7 @@ Use available tools and the user's configured `okf` Bash command when useful. If
 ## Processing
 
 1. Read the selected raw journal and its last-processed timestamp from `ingest-state.md`.
-2. Process only entries after the recorded last-processed timestamp unless this is an explicit re-ingestion.
+2. Process only entries after the recorded last-processed timestamp unless this is an explicit re-ingestion. For imported journals that explicitly lack exact entry times, process the whole journal and record `23:59:59` as an end-of-day completion marker; this is a processing sentinel, not a claimed source-event time. Cite the journal file's imported-notes section rather than inventing a timestamp anchor.
 3. Ask only questions needed to resolve ambiguity, identity, urgency, ownership, purpose, follow-up, missing context, or conflicting sources.
 4. Review relevant entity wiki pages and current-year raw journals, following older material only when relevant.
 5. Resolve high-confidence contradictions using the stronger source and retain citations. Ask the user when confidence is insufficient.
