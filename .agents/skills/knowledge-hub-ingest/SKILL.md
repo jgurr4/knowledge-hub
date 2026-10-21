@@ -9,7 +9,7 @@ Process the Knowledge Hub repository's private `$HOME/.knowledge-hub/` data. Res
 
 ## Invocation
 
-Process the newest unprocessed daily journal by default. Process journals in chronological order when several are unprocessed. A date argument selects one journal. Re-ingestion is explicit only:
+By default, compare all journal dates in `dailynotes/` with `ingest-state.md` and start with the **earliest date that has no processing marker**. If multiple dates are unprocessed, ingest them in ascending chronological order, finishing each date before moving to the next; never skip an older unprocessed journal in favor of a newer one. A date argument selects only that journal. Re-ingestion is explicit only:
 
 ```text
 /knowledge-hub-ingest reingest YYYY-MM-DD
