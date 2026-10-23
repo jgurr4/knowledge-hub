@@ -45,7 +45,7 @@ On every invocation, show the current sources and ask the user to confirm, edit,
 
 Validate each source when it is needed. Record its name, URL, type, governed knowledge, and last successful access date. Do not store credentials, tokens, or cookies. Continue when a source is unavailable, but mark affected conclusions as incomplete.
 
-Use available tools and the user's configured `okf` Bash command when useful. If `okf` rejects a derived document, preserve existing valid files, report the failure, and do not claim the update succeeded.
+Use available tools and the user's configured `okf` Bash command when useful. Run `okf validate` only against `$HOME/.knowledge-hub/wiki/`; only Markdown files under `wiki/` are in OKF validation scope. Do not run OKF validation against the Knowledge Hub root or check files outside `wiki/`. If validation rejects a wiki document, preserve existing valid files, report the failure, and do not claim the update succeeded.
 
 ## Processing
 
@@ -67,7 +67,7 @@ Treat teammate details as factual knowledge supplied by the user or a trusted so
 
 ## Markdown contract
 
-All derived pages must be readable by humans and agents and follow the user's OKF conventions. Run the user's `okf` command when its syntax is known; do not invent a replacement validator.
+All derived pages must be readable by humans and agents and follow the user's OKF conventions. When `okf` syntax is known, run `okf validate $HOME/.knowledge-hub/wiki` to validate wiki files only; do not validate priorities, archives, sources, ingest state, journals, or any other files outside `wiki/`. Do not invent a replacement validator.
 
 Every meaningful derived claim gets a nearby Markdown citation. Include a Sources section with links to the raw journal entries, related entity pages, and external URLs used. Cite raw journal entries by their timestamp headings (for example `dailynotes/YYYY-MM-DD.md#hhmmss`). Never cite or link a daily digest.
 

@@ -19,6 +19,7 @@ To use `note` from any directory, add a symlink to a directory on your `PATH`:
 ```bash
 mkdir -p $HOME/.knowledge-hub/bin
 ln -s <some path>/knowledge-hub/bin/note $HOME/.knowledge-hub/bin/note
+ln -s <some path>/knowledge-hub/bin/todo $HOME/.knowledge-hub/bin/todo
 ```
 
 Ensure `$HOME/.knowledge-hub/bin` is on your `PATH`.
@@ -40,6 +41,8 @@ $HOME/.knowledge-hub/dailynotes/YYYY-MM-DD.md
 ```
 
 Each note receives a timestamp heading. Empty or whitespace-only entries are ignored. The raw daily journal is never rewritten by the capture command.
+
+You can optionally add labels to your note like 'urgency: 3' # range is 1-5 and 'estimate: 3h'. That way the AI doesn't have to ask you later for those details during the ingest. It also makes it clear you want this tracked as a priority
 
 You can also run the script directly from the repository:
 
@@ -82,6 +85,19 @@ The todo skill reads `$HOME/.knowledge-hub/priorities.md` and proposes up to two
 It uses an eight-hour maximum planning window by default. The plan includes urgency, recommended time, context, next steps, missing knowledge, relevant people, teams and channels, and draft messages when communication is the next useful action.
 
 When useful, it can also provide prompts for bounded research, drafting, review, or implementation work that Firstmate could perform. It does not dispatch work automatically.
+
+## Check current priorities
+
+```
+todo
+```
+
+You can also select any of the tasks or a number / range of them to get their full details
+```
+todo 3
+todo 1-5
+todo 1 3 5
+```
 
 ## Repository layout
 

@@ -66,7 +66,7 @@ When the user explicitly reports that a task is completed, dropped, or waiting, 
 
 If an update would be ambiguous, ask before editing. Preserve citations and outcomes.
 
-Use the user's `okf` Bash command when its syntax is known for changed derived Markdown. If validation fails, preserve existing valid files, report the failure, and do not claim success.
+When `okf` syntax is known and wiki files changed, run `okf validate $HOME/.knowledge-hub/wiki` to validate only files under `wiki/`. Do not run OKF validation against the Knowledge Hub root or check priorities, archives, sources, journals, ingest state, or any other files outside `wiki/`. If wiki validation fails, preserve existing valid files, report the failure, and do not claim success.
 
 ## AI assistance
 
