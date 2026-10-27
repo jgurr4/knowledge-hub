@@ -19,7 +19,6 @@ To use `note` from any directory, add a symlink to a directory on your `PATH`:
 ```bash
 mkdir -p $HOME/.knowledge-hub/bin
 ln -s <some path>/knowledge-hub/bin/note $HOME/.knowledge-hub/bin/note
-ln -s <some path>/knowledge-hub/bin/todo $HOME/.knowledge-hub/bin/todo
 ```
 
 Ensure `$HOME/.knowledge-hub/bin` is on your `PATH`.
@@ -89,14 +88,14 @@ When useful, it can also provide prompts for bounded research, drafting, review,
 ## Check current priorities
 
 ```
-todo
+note todo
 ```
 
 You can also select any of the tasks or a number / range of them to get their full details
 ```
-todo 3
-todo 1-5
-todo 1 3 5
+note todo 3
+note todo 1-5
+note todo 1 3 5
 ```
 
 ## Repository layout
