@@ -49,6 +49,17 @@ You can also run the script directly from the repository:
 ./bin/note
 ```
 
+## Search raw notes
+
+Search daily journals for a word or phrase (case-insensitive, literal text):
+
+```bash
+note search deploy
+note search "release plan"
+```
+
+Matches are printed with their file path and line number. No results produce no output.
+
 ## Ingest notes
 
 Use the project-local `knowledge-hub-ingest` skill from your Pi environment.

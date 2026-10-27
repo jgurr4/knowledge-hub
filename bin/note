@@ -47,6 +47,23 @@ if [[ ${1:-} == todo ]]; then
   exit 0
 fi
 
+if [[ ${1:-} == search ]]; then
+  shift
+  if (($# == 0)) || [[ -z "$*" ]]; then
+    printf 'Usage: note search <text>\n' >&2
+    exit 1
+  fi
+  daily_dir="$HOME/.knowledge-hub/dailynotes"
+  shopt -s nullglob
+  notes=("$daily_dir"/*.md)
+  if ((${#notes[@]} == 0)); then
+    printf 'No daily notes found in %s\n' "$daily_dir" >&2
+    exit 1
+  fi
+  grep -inH -F -- "$*" "${notes[@]}" || [[ $? == 1 ]]
+  exit 0
+fi
+
 script_path=$0
 while [[ -L "$script_path" ]]; do
   link_dir=$(cd -P "$(dirname "$script_path")" >/dev/null 2>&1 && pwd)
