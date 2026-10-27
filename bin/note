@@ -49,10 +49,6 @@ fi
 
 if [[ ${1:-} == search ]]; then
   shift
-  if (($# == 0)) || [[ -z "$*" ]]; then
-    printf 'Usage: note search <text>\n' >&2
-    exit 1
-  fi
   daily_dir="$HOME/.knowledge-hub/dailynotes"
   shopt -s nullglob
   notes=("$daily_dir"/*.md)
@@ -60,7 +56,37 @@ if [[ ${1:-} == search ]]; then
     printf 'No daily notes found in %s\n' "$daily_dir" >&2
     exit 1
   fi
-  grep -inH -F -- "$*" "${notes[@]}" || [[ $? == 1 ]]
+
+  if (($# > 0)) && [[ $1 =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+    start=$1
+    end=$start
+    shift
+    if (($# > 0)) && [[ $1 =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+      end=$1
+      shift
+    fi
+    if ! date -j -f '%Y-%m-%d' "$start" +%F >/dev/null 2>&1 ||
+       ! date -j -f '%Y-%m-%d' "$end" +%F >/dev/null 2>&1 || [[ $end < $start ]]; then
+      printf 'Usage: note search [YYYY-MM-DD [YYYY-MM-DD]] [text]\n' >&2
+      exit 1
+    fi
+    selected=()
+    for note in "${notes[@]}"; do
+      day=${note##*/}
+      day=${day%.md}
+      [[ $day < $start || $day > $end ]] || selected+=("$note")
+    done
+    notes=("${selected[@]}")
+  fi
+
+  if (($# == 0)); then
+    for note in "${notes[@]}"; do
+      printf '\n### %s\n' "${note##*/}"
+      cat "$note"
+    done
+  elif ((${#notes[@]})); then
+    grep -inH -F -- "$*" "${notes[@]}" || [[ $? == 1 ]]
+  fi
   exit 0
 fi
 

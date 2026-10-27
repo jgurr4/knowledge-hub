@@ -56,6 +56,10 @@ Search daily journals for a word or phrase (case-insensitive, literal text):
 ```bash
 note search deploy
 note search "release plan"
+note search 2026-10-20 "release plan"          # Search this day
+note search 2026-10-01 2026-10-20 deploy        # Search this inclusive date range
+note search 2026-10-20                          # Show all notes from this day
+note search                                     # Show all notes
 ```
 
 Matches are printed with their file path and line number. No results produce no output.
